@@ -1,0 +1,6 @@
+[package]
+name = "rustivitypub"
+version = "0.0.1"
+authors = ["YOSHIOKA Takuma <tashioka.256@gmail.com>"]
+
+[dependencies]
