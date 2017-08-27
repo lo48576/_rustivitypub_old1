@@ -6,3 +6,4 @@ authors = ["YOSHIOKA Takuma <tashioka.256@gmail.com>"]
 [dependencies]
 strum = "^0.8"
 strum_macros = "^0.8"
+url = "^1.5.1"

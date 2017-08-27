@@ -10,5 +10,9 @@
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
+pub extern crate url;
+
+pub use iri::{Iri, IriBuf};
 
 pub mod document;
+pub mod iri;
