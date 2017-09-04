@@ -2,10 +2,12 @@
 
 use document::JsonValue;
 pub use self::error::{Result, PropertyError};
+pub use self::link::LinkView;
 pub use self::object::ObjectView;
 pub use self::value::IriView;
 
 pub mod error;
+pub mod link;
 pub mod object;
 pub mod value;
 
