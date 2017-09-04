@@ -2,8 +2,10 @@
 
 use document::JsonValue;
 pub use self::error::{Result, PropertyError};
+pub use self::value::IriView;
 
 pub mod error;
+pub mod value;
 
 
 /// Attempt to construct `Self` via a conversion.
