@@ -10,6 +10,7 @@ pub use self::single_or_multi::{SingleOrMultiView, SingleOrMultiViewIter};
 pub use self::value::IriView;
 
 pub mod error;
+pub mod fetch;
 pub mod link;
 pub mod object;
 pub mod object_or_link;
@@ -34,29 +35,5 @@ pub trait TryFromJsonValue<'a>: Sized {
     /// This should be called at the head of `try_from_json_value()`.
     fn validate_json_value(_value: &JsonValue) -> Result<()> {
         Ok(())
-    }
-}
-
-
-/// Fetches an object.
-#[inline]
-fn fetch_obj(object: Option<&JsonValue>) -> Result<&JsonValue> {
-    object.ok_or(PropertyError::NoSuchProperty)
-}
-
-
-/// Fetches an IRI.
-#[inline]
-fn fetch_iri(object: Option<&JsonValue>) -> Result<IriView> {
-    fetch_obj(object).and_then(IriView::try_from_json_value)
-}
-
-
-/// Fetches a string.
-#[inline]
-fn fetch_str(object: Option<&JsonValue>) -> Result<&str> {
-    match *fetch_obj(object)? {
-        JsonValue::String(ref s) => Ok(s),
-        _ => Err(PropertyError::TypeMismatch),
     }
 }

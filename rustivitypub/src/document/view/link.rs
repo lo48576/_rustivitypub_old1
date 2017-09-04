@@ -1,9 +1,8 @@
 //! Link view.
 
 use document::JsonValue;
-use document::consts;
+use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
-use document::view::{fetch_iri, fetch_str};
 
 
 /// A link view.
@@ -22,17 +21,17 @@ pub struct LinkView<'a> {
 
 impl<'a> LinkView<'a> {
     /// Returns `type` as string.
+    ///
+    /// See [`document::view::fetch::property::type_raw()`](../fetch/property/fn.type_raw.html).
     pub fn type_raw(&self) -> Result<&'a str> {
-        fetch_str(self.object.get(consts::TYPE))
+        fetch::property::type_raw(self.object)
     }
 
     /// Returns an IRI to the link target.
+    ///
+    /// See [`document::view::fetch::property::href()`](../fetch/property/fn.href.html).
     pub fn href(&self) -> Result<IriView<'a>> {
-        match *self.object {
-            JsonValue::Object(ref map) => fetch_iri(map.get(consts::HREF)),
-            JsonValue::String(ref s) => Ok(IriView::new(s)),
-            _ => unreachable!(),
-        }
+        fetch::property::href(self.object)
     }
 }
 

@@ -1,9 +1,8 @@
 //! Object view.
 
 use document::JsonValue;
-use document::consts;
+use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
-use document::view::{fetch_iri, fetch_str};
 
 
 /// An object view.
@@ -18,13 +17,17 @@ pub struct ObjectView<'a> {
 
 impl<'a> ObjectView<'a> {
     /// Returns `id`.
-    pub fn id(&self) -> Result<IriView<'a>> {
-        fetch_iri(self.object.get(consts::ID))
+    ///
+    /// See [`document::view::fetch::property::id()`](../fetch/property/fn.id.html).
+    pub fn id(&self) -> Result<Option<IriView<'a>>> {
+        fetch::property::id(self.object)
     }
 
     /// Returns `type` as string.
+    ///
+    /// See [`document::view::fetch::property::type_raw()`](../fetch/property/fn.type_raw.html).
     pub fn type_raw(&self) -> Result<&'a str> {
-        fetch_str(self.object.get(consts::TYPE))
+        fetch::property::type_raw(self.object)
     }
 }
 
