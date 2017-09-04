@@ -7,6 +7,7 @@
 // > warning: you should put `ActivityPub` between ticks in the documentation
 #![allow(doc_markdown)]
 
+extern crate serde_json;
 extern crate strum;
 #[macro_use]
 extern crate strum_macros;
