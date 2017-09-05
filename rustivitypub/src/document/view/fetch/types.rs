@@ -2,7 +2,7 @@
 
 use document::JsonValue;
 use document::view::{Result, PropertyError, TryFromJsonValue};
-use document::view::IriView;
+use document::view::{NaturalLanguageView, IriView};
 
 
 /// Returns a JSON object (map).
@@ -26,4 +26,11 @@ pub fn string(object: Option<&JsonValue>) -> Result<&str> {
         JsonValue::String(ref s) => Ok(s),
         _ => Err(PropertyError::TypeMismatch),
     }
+}
+
+
+/// Returns a natural language view.
+#[inline]
+pub fn natural_language_string(object: Option<&JsonValue>) -> Result<NaturalLanguageView> {
+    NaturalLanguageView::try_from_json_value(json_obj(object)?)
 }
