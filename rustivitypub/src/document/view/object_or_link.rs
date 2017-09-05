@@ -5,7 +5,7 @@ use document::view::{Result, TryFromJsonValue, ObjectView, LinkView};
 
 
 /// A view to an object or a link.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct ObjectOrLinkView<'a> {
     /// Target object.
     object: &'a JsonValue,

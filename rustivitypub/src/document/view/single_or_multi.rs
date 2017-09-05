@@ -7,7 +7,7 @@ use document::view::{TryFromJsonValue, Result};
 
 
 /// A view to a single value or multi values.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum SingleOrMultiJsonView<'a> {
     /// Single value.
     Single(&'a JsonValue),
@@ -106,7 +106,7 @@ impl<'a> DoubleEndedIterator for SingleOrMultiJsonViewIter<'a> {
 
 
 /// A view to a single object or multiple objects.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct SingleOrMultiView<'a, T> {
     /// Target object.
     object: SingleOrMultiJsonView<'a>,

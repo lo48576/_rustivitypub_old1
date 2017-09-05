@@ -13,7 +13,7 @@ use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
 /// Link](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#link) and
 /// [\[REC-activitystreams-vocabulary-20170523\] 2. Core
 /// Types](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-link).
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct LinkView<'a> {
     /// Target object.
     object: &'a JsonValue,

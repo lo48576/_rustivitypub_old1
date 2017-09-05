@@ -9,7 +9,7 @@ use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
 ///
 /// See [\[REC-activitystreams-core-20170523\] 4.1
 /// Object](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#object).
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct ObjectView<'a> {
     /// Target object.
     object: &'a JsonValue,

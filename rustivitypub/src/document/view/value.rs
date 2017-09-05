@@ -7,7 +7,7 @@ use iri::ResolvedIri;
 
 
 /// An IRI view.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct IriView<'a> {
     /// Target object.
     object: &'a str,
@@ -47,7 +47,7 @@ impl<'a> TryFromJsonValue<'a> for IriView<'a> {
 ///
 /// See [\[REC-activitystreams-core-20170523\] 4.7 Natural Language
 /// Values](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#naturalLanguageValues).
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum NaturalLanguageView<'a> {
     /// A simple string without (explicit) language tags.
     String(&'a str),
@@ -84,7 +84,7 @@ impl<'a> TryFromJsonValue<'a> for NaturalLanguageView<'a> {
 /// > Every key in the object form *MUST* be a well-formed
 /// > [\[BCP47\]](https://tools.ietf.org/html/bcp47) Language-Tag. The associated values *MUST*
 /// > be strings.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct LangStringView<'a> {
     /// Target object.
     object: &'a JsonObject,
@@ -163,7 +163,7 @@ impl<'a> Iterator for LangStringViewIter<'a> {
 /// * as2-partial-time: hh:mm[:ss][.secfrac]
 /// * as2-full-time: hh:mm[:ss][.secfrac]["Z" / ("+"/"-")hh:mm]
 /// * as2-date-time: YYYY-MM-DDThh:mm[:ss][.secfrac]["Z" / ("+"/"-")hh:mm]
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct DateTimeView<'a> {
     /// Target object.
     object: &'a str,
