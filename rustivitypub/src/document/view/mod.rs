@@ -7,7 +7,7 @@ pub use self::object::ObjectView;
 pub use self::object_or_link::ObjectOrLinkView;
 pub use self::single_or_multi::{SingleOrMultiJsonView, SingleOrMultiJsonViewIter};
 pub use self::single_or_multi::{SingleOrMultiView, SingleOrMultiViewIter};
-pub use self::value::{NaturalLanguageView, LangStringView, IriView};
+pub use self::value::{NaturalLanguageView, LangStringView, IriView, DateTimeView};
 
 pub mod error;
 pub mod fetch;

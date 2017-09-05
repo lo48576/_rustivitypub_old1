@@ -152,3 +152,43 @@ impl<'a> Iterator for LangStringViewIter<'a> {
         }
     }
 }
+
+
+/// A datetime view.
+///
+/// See [\[REC-activitystreams-core-20170523\] 2.3 Date and
+/// Times](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#dates) and [\[RFC3339\]
+/// 5.6. Internet Date/Time Format](https://tools.ietf.org/html/rfc3339#section-5.6).
+///
+/// * as2-partial-time: hh:mm[:ss][.secfrac]
+/// * as2-full-time: hh:mm[:ss][.secfrac]["Z" / ("+"/"-")hh:mm]
+/// * as2-date-time: YYYY-MM-DDThh:mm[:ss][.secfrac]["Z" / ("+"/"-")hh:mm]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct DateTimeView<'a> {
+    /// Target object.
+    object: &'a str,
+}
+
+impl<'a> DateTimeView<'a> {
+    /// Returns the raw string data.
+    pub fn raw_str(&self) -> &'a str {
+        self.object
+    }
+}
+
+impl<'a> TryFromJsonValue<'a> for DateTimeView<'a> {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(Self { object: s }),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
+    }
+}
