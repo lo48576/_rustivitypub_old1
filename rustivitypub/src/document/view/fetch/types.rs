@@ -2,7 +2,8 @@
 
 use document::JsonValue;
 use document::view::{Result, PropertyError, TryFromJsonValue};
-use document::view::{NaturalLanguageView, IriView};
+use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
+use document::view::DateTimeView;
 
 
 /// Returns a JSON object (map).
@@ -29,8 +30,24 @@ pub fn string(object: Option<&JsonValue>) -> Result<&str> {
 }
 
 
+/// Returns `SingleOrMultiView<ObjectOrLinkView>`.
+#[inline]
+pub fn single_or_multi_object_or_link(
+    object: Option<&JsonValue>,
+) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    SingleOrMultiView::try_from_json_value(json_obj(object)?)
+}
+
+
 /// Returns a natural language view.
 #[inline]
 pub fn natural_language_string(object: Option<&JsonValue>) -> Result<NaturalLanguageView> {
     NaturalLanguageView::try_from_json_value(json_obj(object)?)
+}
+
+
+/// Returns a `DateTimeView`.
+#[inline]
+pub fn datetime(object: Option<&JsonValue>) -> Result<DateTimeView> {
+    DateTimeView::try_from_json_value(json_obj(object)?)
 }

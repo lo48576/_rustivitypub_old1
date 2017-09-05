@@ -3,6 +3,7 @@
 use document::JsonValue;
 use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
+use document::view::{ObjectOrLinkView, SingleOrMultiView, NaturalLanguageView, DateTimeView};
 
 
 /// An object view.
@@ -28,6 +29,69 @@ impl<'a> ObjectView<'a> {
     /// See [`document::view::fetch::property::type_raw()`](../fetch/property/fn.type_raw.html).
     pub fn type_raw(&self) -> Result<&'a str> {
         fetch::property::type_raw(self.object)
+    }
+
+    /// Returns `attachment`.
+    ///
+    /// See [`document::view::fetch::property::attachment()`](../fetch/property/fn.attachment.html).
+    pub fn attachment(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::attachment(self.object)
+    }
+
+    /// Returns `audience`.
+    ///
+    /// See [`document::view::fetch::property::audience()`](../fetch/property/fn.audience.html).
+    pub fn audience(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::audience(self.object)
+    }
+
+    /// Returns `attributedTo`.
+    ///
+    /// See [`document::view::fetch::property::attributed_to()`](../fetch/property/fn.attributed_to.html).
+    pub fn attributed_to(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::attributed_to(self.object)
+    }
+
+    /// Returns `content`.
+    ///
+    /// See [`document::view::fetch::property::content()`](../fetch/property/fn.content.html).
+    pub fn content(&self) -> Result<NaturalLanguageView<'a>> {
+        fetch::property::content(self.object)
+    }
+
+    /// Returns `context`.
+    ///
+    /// See [`document::view::fetch::property::context()`](../fetch/property/fn.context.html).
+    pub fn context(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::context(self.object)
+    }
+
+    /// Returns `endTime`.
+    ///
+    /// See [`document::view::fetch::property::end_time()`](../fetch/property/fn.end_time.html).
+    pub fn end_time(&self) -> Result<DateTimeView<'a>> {
+        fetch::property::end_time(self.object)
+    }
+
+    /// Returns `generator`.
+    ///
+    /// See [`document::view::fetch::property::generator()`](../fetch/property/fn.generator.html).
+    pub fn generator(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::generator(self.object)
+    }
+
+    /// Returns `icon`.
+    ///
+    /// See [`document::view::fetch::property::icon()`](../fetch/property/fn.icon.html).
+    pub fn icon(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::icon(self.object)
+    }
+
+    /// Returns `name`.
+    ///
+    /// See [`document::view::fetch::property::name()`](../fetch/property/fn.name.html).
+    pub fn name(&self) -> Result<NaturalLanguageView<'a>> {
+        fetch::property::name(self.object)
     }
 }
 
