@@ -192,3 +192,35 @@ impl<'a> TryFromJsonValue<'a> for DateTimeView<'a> {
         }
     }
 }
+
+
+/// A MIME type view.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct MediaTypeView<'a> {
+    /// Target object.
+    object: &'a str,
+}
+
+impl<'a> MediaTypeView<'a> {
+    /// Returns the raw string data.
+    pub fn raw_str(&self) -> &'a str {
+        self.object
+    }
+}
+
+impl<'a> TryFromJsonValue<'a> for MediaTypeView<'a> {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(Self { object: s }),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
+    }
+}

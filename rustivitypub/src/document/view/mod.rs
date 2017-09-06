@@ -8,6 +8,7 @@ pub use self::object_or_link::ObjectOrLinkView;
 pub use self::single_or_multi::{SingleOrMultiJsonView, SingleOrMultiJsonViewIter};
 pub use self::single_or_multi::{SingleOrMultiView, SingleOrMultiViewIter};
 pub use self::value::{NaturalLanguageView, LangStringView, IriView, DateTimeView};
+pub use self::value::MediaTypeView;
 
 pub mod error;
 pub mod fetch;
