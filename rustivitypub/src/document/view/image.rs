@@ -1,26 +1,24 @@
-//! `Docuemnt` type object view.
+//! `Image` type object view.
 
 use document::JsonValue;
 use document::view::{Result, PropertyError, TryFromJsonValue};
-use document::view::ObjectView;
+use document::view::{ObjectView, DocumentView};
 
 
-/// A `Document` type object view.
+/// A `Image` type object view.
 ///
 /// See [\[REC-activitystreams-core-20170523\] 4.1
-/// Object](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#dfn-document).
+/// Object](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#dfn-image).
 #[derive(Debug, Clone, Copy, PartialEq)]
-pub struct DocumentView<'a> {
+pub struct ImageView<'a> {
     /// Target object.
     object: &'a JsonValue,
 }
 
-impl<'a> DocumentView<'a> {
-    /// Creates a new `DocumentView` from a raw JSON object.
-    ///
-    /// Use `TryFromJsonValue::try_from_json_value` for normal use.
-    pub(crate) fn new(object: &'a JsonValue) -> Self {
-        Self { object }
+impl<'a> ImageView<'a> {
+    /// Upcasts the view.
+    pub fn document_view(&self) -> DocumentView<'a> {
+        DocumentView::new(self.object)
     }
 
     /// Upcasts the view.
@@ -29,7 +27,7 @@ impl<'a> DocumentView<'a> {
     }
 }
 
-impl<'a> TryFromJsonValue<'a> for DocumentView<'a> {
+impl<'a> TryFromJsonValue<'a> for ImageView<'a> {
     fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
         Self::validate_json_value(value)?;
         match *value {

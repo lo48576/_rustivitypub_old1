@@ -3,6 +3,7 @@
 use document::JsonValue;
 pub use self::document::DocumentView;
 pub use self::error::{Result, PropertyError};
+pub use self::image::ImageView;
 pub use self::link::LinkView;
 pub use self::object::ObjectView;
 pub use self::object_or_link::ObjectOrLinkView;
@@ -14,6 +15,7 @@ pub use self::value::{MediaTypeView, DurationView};
 pub mod document;
 pub mod error;
 pub mod fetch;
+pub mod image;
 pub mod link;
 pub mod object;
 pub mod object_or_link;
