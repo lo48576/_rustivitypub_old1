@@ -224,3 +224,40 @@ impl<'a> TryFromJsonValue<'a> for MediaTypeView<'a> {
         }
     }
 }
+
+
+/// A duration view.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-duration)
+/// and [\[REC-xmlschema11-2-20120405\] 3.3.6
+/// duration](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#duration).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct DurationView<'a> {
+    /// Target object.
+    object: &'a str,
+}
+
+impl<'a> DurationView<'a> {
+    /// Returns the raw string data.
+    pub fn raw_str(&self) -> &'a str {
+        self.object
+    }
+}
+
+impl<'a> TryFromJsonValue<'a> for DurationView<'a> {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(Self { object: s }),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
+    }
+}
