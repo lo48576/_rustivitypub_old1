@@ -4,7 +4,7 @@ use document::JsonValue;
 use document::consts;
 use document::view::{Result, PropertyError, TryFromJsonValue};
 use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
-use document::view::DateTimeView;
+use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView};
 use document::view::fetch::types;
 
 
@@ -66,6 +66,36 @@ pub fn audience(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView
 }
 
 
+/// Returns `bcc`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-bcc).
+#[inline]
+pub fn bcc(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::BCC))
+}
+
+
+/// Returns `bto`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-bto).
+#[inline]
+pub fn bto(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::BTO))
+}
+
+
+/// Returns `cc`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-cc).
+#[inline]
+pub fn cc(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::CC))
+}
+
+
 /// Returns `content`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
@@ -83,6 +113,16 @@ pub fn content(object: &JsonValue) -> Result<NaturalLanguageView> {
 #[inline]
 pub fn context(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
     types::single_or_multi_object_or_link(object.get(consts::CONTEXT))
+}
+
+
+/// Returns `duration`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-duration).
+#[inline]
+pub fn duration(object: &JsonValue) -> Result<DurationView> {
+    types::duration(object.get(consts::DURATION))
 }
 
 
@@ -135,6 +175,29 @@ pub fn icon(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
 }
 
 
+// FIXME: implement `image()`.
+
+
+/// Returns `inReplyTo`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-inreplyto).
+#[inline]
+pub fn in_reply_to(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::IN_REPLY_TO))
+}
+
+
+/// Returns `location`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-location).
+#[inline]
+pub fn location(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::LOCATION))
+}
+
+
 /// Returns `name`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
@@ -142,4 +205,106 @@ pub fn icon(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
 #[inline]
 pub fn name(object: &JsonValue) -> Result<NaturalLanguageView> {
     types::natural_language_string(object.get(consts::NAME))
+}
+
+
+/// Returns `mediaType`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-mediatype).
+#[inline]
+pub fn media_type(object: &JsonValue) -> Result<MediaTypeView> {
+    types::media_type(object.get(consts::MEDIA_TYPE))
+}
+
+
+/// Returns `preview`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-preview).
+#[inline]
+pub fn preview(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::PREVIEW))
+}
+
+
+/// Returns `published`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-published).
+#[inline]
+pub fn published(object: &JsonValue) -> Result<DateTimeView> {
+    types::datetime(object.get(consts::PUBLISHED))
+}
+
+
+/// Returns `replies`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-replies).
+#[inline]
+pub fn replies(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::REPLIES))
+}
+
+
+/// Returns `start_time`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-starttime).
+#[inline]
+pub fn start_time(object: &JsonValue) -> Result<DateTimeView> {
+    types::datetime(object.get(consts::START_TIME))
+}
+
+
+/// Returns `summary`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-summary).
+#[inline]
+pub fn summary(object: &JsonValue) -> Result<NaturalLanguageView> {
+    types::natural_language_string(object.get(consts::SUMMARY))
+}
+
+
+/// Returns `tag`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-tag).
+#[inline]
+pub fn tag(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::TAG))
+}
+
+
+/// Returns `to`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-to).
+#[inline]
+pub fn to(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
+    types::single_or_multi_object_or_link(object.get(consts::TO))
+}
+
+
+/// Returns `updated`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-updated).
+#[inline]
+pub fn updated(object: &JsonValue) -> Result<DateTimeView> {
+    types::datetime(object.get(consts::UPDATED))
+}
+
+
+/// Returns `url`.
+///
+/// See [\[REC-activitystreams-core-20170523\] 4.2
+/// Link](https://www.w3.org/TR/2017/REC-activitystreams-core-20170523/#link) and
+/// [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-url).
+#[inline]
+pub fn url(object: &JsonValue) -> Result<SingleOrMultiView<LinkView>> {
+    types::single_or_multi_link(object.get(consts::URL))
 }

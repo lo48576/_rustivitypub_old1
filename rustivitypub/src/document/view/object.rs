@@ -4,6 +4,7 @@ use document::JsonValue;
 use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
 use document::view::{ObjectOrLinkView, SingleOrMultiView, NaturalLanguageView, DateTimeView};
+use document::view::{LinkView, MediaTypeView};
 
 
 /// An object view.
@@ -52,6 +53,13 @@ impl<'a> ObjectView<'a> {
         fetch::property::attributed_to(self.object)
     }
 
+    /// Returns `bto`.
+    ///
+    /// See [`document::view::fetch::property::to()`](../fetch/property/fn.bto.html).
+    pub fn bto(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::bto(self.object)
+    }
+
     /// Returns `content`.
     ///
     /// See [`document::view::fetch::property::content()`](../fetch/property/fn.content.html).
@@ -87,11 +95,97 @@ impl<'a> ObjectView<'a> {
         fetch::property::icon(self.object)
     }
 
+    // FIXME: implement `image()`.
+
+    /// Returns `inReplyTo`.
+    ///
+    /// See [`document::view::fetch::property::in_reply_to()`](../fetch/property/fn.in_reply_to.html).
+    pub fn in_reply_to(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::in_reply_to(self.object)
+    }
+
+    /// Returns `location`.
+    ///
+    /// See [`document::view::fetch::property::location()`](../fetch/property/fn.location.html).
+    pub fn location(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::location(self.object)
+    }
+
     /// Returns `name`.
     ///
     /// See [`document::view::fetch::property::name()`](../fetch/property/fn.name.html).
     pub fn name(&self) -> Result<NaturalLanguageView<'a>> {
         fetch::property::name(self.object)
+    }
+
+    /// Returns `mediaType`.
+    ///
+    /// See [`document::view::fetch::property::media_type()`](../fetch/property/fn.media_type.html).
+    pub fn media_type(&self) -> Result<MediaTypeView<'a>> {
+        fetch::property::media_type(self.object)
+    }
+
+    /// Returns `preview`.
+    ///
+    /// See [`document::view::fetch::property::preview()`](../fetch/property/fn.preview.html).
+    pub fn preview(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::preview(self.object)
+    }
+
+    /// Returns `published`.
+    ///
+    /// See [`document::view::fetch::property::published()`](../fetch/property/fn.published.html).
+    pub fn published(&self) -> Result<DateTimeView<'a>> {
+        fetch::property::published(self.object)
+    }
+
+    /// Returns `replies`.
+    ///
+    /// See [`document::view::fetch::property::replies()`](../fetch/property/fn.replies.html).
+    pub fn replies(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::replies(self.object)
+    }
+
+    /// Returns `startTime`.
+    ///
+    /// See [`document::view::fetch::property::start_time()`](../fetch/property/fn.starttime.html).
+    pub fn start_time(&self) -> Result<DateTimeView<'a>> {
+        fetch::property::start_time(self.object)
+    }
+
+    /// Returns `summary`.
+    ///
+    /// See [`document::view::fetch::property::summary()`](../fetch/property/fn.summary.html).
+    pub fn summary(&self) -> Result<NaturalLanguageView<'a>> {
+        fetch::property::summary(self.object)
+    }
+
+    /// Returns `tag`.
+    ///
+    /// See [`document::view::fetch::property::tag()`](../fetch/property/fn.tag.html).
+    pub fn tag(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::tag(self.object)
+    }
+
+    /// Returns `to`.
+    ///
+    /// See [`document::view::fetch::property::to()`](../fetch/property/fn.to.html).
+    pub fn to(&self) -> Result<SingleOrMultiView<'a, ObjectOrLinkView>> {
+        fetch::property::to(self.object)
+    }
+
+    /// Returns `updated`.
+    ///
+    /// See [`document::view::fetch::property::updated()`](../fetch/property/fn.updated.html).
+    pub fn updated(&self) -> Result<DateTimeView<'a>> {
+        fetch::property::updated(self.object)
+    }
+
+    /// Returns `url`.
+    ///
+    /// See [`document::view::fetch::property::url()`](../fetch/property/fn.url.html).
+    pub fn url(&self) -> Result<SingleOrMultiView<'a, LinkView>> {
+        fetch::property::url(self.object)
     }
 }
 
