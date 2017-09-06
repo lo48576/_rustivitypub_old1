@@ -18,6 +18,13 @@ pub struct ObjectView<'a> {
 }
 
 impl<'a> ObjectView<'a> {
+    /// Creates a new `ObjectView` from a raw JSON object.
+    ///
+    /// Use `TryFromJsonValue::try_from_json_value` for normal use.
+    pub(crate) fn new(object: &'a JsonValue) -> Self {
+        Self { object }
+    }
+
     /// Returns `id`.
     ///
     /// See [`document::view::fetch::property::id()`](../fetch/property/fn.id.html).

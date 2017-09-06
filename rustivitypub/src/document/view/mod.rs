@@ -1,6 +1,7 @@
 //! Object views.
 
 use document::JsonValue;
+pub use self::document::DocumentView;
 pub use self::error::{Result, PropertyError};
 pub use self::link::LinkView;
 pub use self::object::ObjectView;
@@ -10,6 +11,7 @@ pub use self::single_or_multi::{SingleOrMultiView, SingleOrMultiViewIter};
 pub use self::value::{NaturalLanguageView, LangStringView, IriView, DateTimeView};
 pub use self::value::{MediaTypeView, DurationView};
 
+pub mod document;
 pub mod error;
 pub mod fetch;
 pub mod link;
