@@ -4,7 +4,7 @@ use document::JsonValue;
 use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
 use document::view::{ObjectOrLinkView, SingleOrMultiView, NaturalLanguageView, DateTimeView};
-use document::view::{LinkView, MediaTypeView};
+use document::view::{LinkView, MediaTypeView, ImageOrLinkView};
 
 
 /// An object view.
@@ -102,7 +102,12 @@ impl<'a> ObjectView<'a> {
         fetch::property::icon(self.object)
     }
 
-    // FIXME: implement `image()`.
+    /// Returns `image`.
+    ///
+    /// See [`document::view::fetch::property::image()`](../fetch/property/fn.image.html).
+    pub fn image(&self) -> Result<SingleOrMultiView<'a, ImageOrLinkView>> {
+        fetch::property::image(self.object)
+    }
 
     /// Returns `inReplyTo`.
     ///

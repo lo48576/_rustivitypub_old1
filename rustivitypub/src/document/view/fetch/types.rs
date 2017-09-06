@@ -3,7 +3,7 @@
 use document::JsonValue;
 use document::view::{Result, PropertyError, TryFromJsonValue};
 use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
-use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView};
+use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView, ImageOrLinkView};
 
 
 /// Returns a JSON object (map).
@@ -42,6 +42,15 @@ pub fn single_or_multi_object_or_link(
 /// Returns `SingleOrMultiView<LinkView>`.
 #[inline]
 pub fn single_or_multi_link(object: Option<&JsonValue>) -> Result<SingleOrMultiView<LinkView>> {
+    SingleOrMultiView::try_from_json_value(json_obj(object)?)
+}
+
+
+/// Returns `ImageOrMultiView<LinkView>`.
+#[inline]
+pub fn single_or_multi_image_or_link(
+    object: Option<&JsonValue>,
+) -> Result<SingleOrMultiView<ImageOrLinkView>> {
     SingleOrMultiView::try_from_json_value(json_obj(object)?)
 }
 

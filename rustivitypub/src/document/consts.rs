@@ -84,6 +84,12 @@ pub const HREF: &str = "href";
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-icon).
 pub const ICON: &str = "icon";
 
+/// `image`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-image-term).
+pub const IMAGE: &str = "image";
+
 /// `in_reply_to`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.

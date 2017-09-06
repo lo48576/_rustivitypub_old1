@@ -4,7 +4,7 @@ use document::JsonValue;
 use document::consts;
 use document::view::{Result, PropertyError, TryFromJsonValue};
 use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
-use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView};
+use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView, ImageOrLinkView};
 use document::view::fetch::types;
 
 
@@ -175,7 +175,14 @@ pub fn icon(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkView>> {
 }
 
 
-// FIXME: implement `image()`.
+/// Returns `image`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-image-term).
+#[inline]
+pub fn image(object: &JsonValue) -> Result<SingleOrMultiView<ImageOrLinkView>> {
+    types::single_or_multi_image_or_link(object.get(consts::IMAGE))
+}
 
 
 /// Returns `inReplyTo`.
