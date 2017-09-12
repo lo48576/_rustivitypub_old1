@@ -132,6 +132,9 @@ impl<'a> ObjectView<'a> {
 
     /// Returns `mediaType`.
     ///
+    /// > When used on an Object, identifies the MIME media type of the value of the content
+    /// > property. If not specified, the content property is assumed to contain text/html content.
+    ///
     /// See [`document::view::fetch::property::media_type()`](../fetch/property/fn.media_type.html).
     pub fn media_type(&self) -> Result<MediaTypeView<'a>> {
         fetch::property::media_type(self.object)

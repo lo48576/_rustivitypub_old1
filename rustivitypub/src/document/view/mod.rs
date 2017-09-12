@@ -10,7 +10,7 @@ pub use self::object_or_link::{ObjectOrLinkView, ImageOrLinkView};
 pub use self::single_or_multi::{SingleOrMultiJsonView, SingleOrMultiJsonViewIter};
 pub use self::single_or_multi::{SingleOrMultiView, SingleOrMultiViewIter};
 pub use self::value::{NaturalLanguageView, LangStringView, IriView, DateTimeView};
-pub use self::value::{MediaTypeView, DurationView};
+pub use self::value::{MediaTypeView, DurationView, LanguageTagView};
 
 pub mod document;
 pub mod error;
@@ -40,5 +40,22 @@ pub trait TryFromJsonValue<'a>: Sized {
     /// This should be called at the head of `try_from_json_value()`.
     fn validate_json_value(_value: &JsonValue) -> Result<()> {
         Ok(())
+    }
+}
+
+impl<'a> TryFromJsonValue<'a> for &'a str {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(s),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
     }
 }

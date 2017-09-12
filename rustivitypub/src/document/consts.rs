@@ -72,11 +72,23 @@ pub const END_TIME: &str = "endTime";
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-generator).
 pub const GENERATOR: &str = "generator";
 
+/// `height`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-height).
+pub const HEIGHT: &str = "height";
+
 /// `href`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-href).
 pub const HREF: &str = "href";
+
+/// `hreflang`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-hreflang).
+pub const HREFLANG: &str = "hreflang";
 
 /// `icon`.
 ///
@@ -126,6 +138,12 @@ pub const PREVIEW: &str = "preview";
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-published).
 pub const PUBLISHED: &str = "published";
 
+/// `rel`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-rel).
+pub const REL: &str = "rel";
+
 /// `replies`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
@@ -167,3 +185,9 @@ pub const UPDATED: &str = "updated";
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-url).
 pub const URL: &str = "url";
+
+/// `width`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-width).
+pub const WIDTH: &str = "width";
