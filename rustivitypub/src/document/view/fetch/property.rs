@@ -217,6 +217,11 @@ pub fn name(object: &JsonValue) -> Result<NaturalLanguageView> {
 
 /// Returns `mediaType`.
 ///
+/// > When used on a Link, identifies the MIME media type of the referenced resource.
+/// >
+/// > When used on an Object, identifies the MIME media type of the value of the `content`
+/// > property. If not specified, the `content` property is assumed to contain `text/html` content.
+///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
 /// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-mediatype).
 #[inline]
