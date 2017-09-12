@@ -42,3 +42,20 @@ pub trait TryFromJsonValue<'a>: Sized {
         Ok(())
     }
 }
+
+impl<'a> TryFromJsonValue<'a> for &'a str {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(s),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
+    }
+}
