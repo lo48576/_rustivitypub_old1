@@ -261,3 +261,37 @@ impl<'a> TryFromJsonValue<'a> for DurationView<'a> {
         }
     }
 }
+
+
+/// A language tag view.
+///
+/// See [\[BCP47\] Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct LanguageTagView<'a> {
+    /// Target object.
+    object: &'a str,
+}
+
+impl<'a> LanguageTagView<'a> {
+    /// Returns the raw string data.
+    pub fn raw_str(&self) -> &'a str {
+        self.object
+    }
+}
+
+impl<'a> TryFromJsonValue<'a> for LanguageTagView<'a> {
+    fn try_from_json_value(value: &'a JsonValue) -> Result<Self> {
+        Self::validate_json_value(value)?;
+        match *value {
+            JsonValue::String(ref s) => Ok(Self { object: s }),
+            ref v => unreachable!("`validate_json_value()` should deny `{:?}`", v),
+        }
+    }
+
+    fn validate_json_value(value: &JsonValue) -> Result<()> {
+        match *value {
+            JsonValue::String(_) => Ok(()),
+            _ => Err(PropertyError::TypeMismatch),
+        }
+    }
+}
