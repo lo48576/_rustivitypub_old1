@@ -4,12 +4,23 @@ use document::JsonValue;
 use document::view::{Result, PropertyError, TryFromJsonValue};
 use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
 use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView, ImageOrLinkView};
+use document::view::LanguageTagView;
 
 
 /// Returns a JSON object (map).
 #[inline]
 pub fn json_obj(object: Option<&JsonValue>) -> Result<&JsonValue> {
     object.ok_or(PropertyError::NoSuchProperty)
+}
+
+
+/// Returns a `u64`.
+#[inline]
+pub fn non_negative_integer(object: Option<&JsonValue>) -> Result<u64> {
+    match *json_obj(object)? {
+        JsonValue::Number(ref n) => n.as_u64().ok_or(PropertyError::TypeMismatch),
+        _ => Err(PropertyError::TypeMismatch),
+    }
 }
 
 
@@ -27,6 +38,13 @@ pub fn string(object: Option<&JsonValue>) -> Result<&str> {
         JsonValue::String(ref s) => Ok(s),
         _ => Err(PropertyError::TypeMismatch),
     }
+}
+
+
+/// Returns `SingleOrMultiView<&str>`.
+#[inline]
+pub fn single_or_multi_string(object: Option<&JsonValue>) -> Result<SingleOrMultiView<&str>> {
+    SingleOrMultiView::try_from_json_value(json_obj(object)?)
 }
 
 
@@ -80,4 +98,11 @@ pub fn media_type(object: Option<&JsonValue>) -> Result<MediaTypeView> {
 #[inline]
 pub fn duration(object: Option<&JsonValue>) -> Result<DurationView> {
     DurationView::try_from_json_value(json_obj(object)?)
+}
+
+
+/// Returns `LanguageTagView`.
+#[inline]
+pub fn language_tag(object: Option<&JsonValue>) -> Result<LanguageTagView> {
+    LanguageTagView::try_from_json_value(json_obj(object)?)
 }

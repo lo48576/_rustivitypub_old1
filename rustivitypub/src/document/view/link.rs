@@ -3,6 +3,8 @@
 use document::JsonValue;
 use document::view::fetch;
 use document::view::{Result, PropertyError, TryFromJsonValue, IriView};
+use document::view::{SingleOrMultiView, NaturalLanguageView, LanguageTagView, MediaTypeView};
+use document::view::ObjectOrLinkView;
 
 
 /// A link view.
@@ -32,6 +34,57 @@ impl<'a> LinkView<'a> {
     /// See [`document::view::fetch::property::href()`](../fetch/property/fn.href.html).
     pub fn href(&self) -> Result<IriView<'a>> {
         fetch::property::href(self.object)
+    }
+
+    /// Returns `height`.
+    ///
+    /// See [`document::view::fetch::property::height()`](../fetch/property/fn.height.html).
+    pub fn height(&self) -> Result<u64> {
+        fetch::property::height(self.object)
+    }
+
+    /// Returns `hreflang`.
+    ///
+    /// See [`document::view::fetch::property::hreflang()`](../fetch/property/fn.hreflang.html).
+    pub fn hreflang(&self) -> Result<LanguageTagView<'a>> {
+        fetch::property::hreflang(self.object)
+    }
+
+    /// Returns `mediaType`.
+    ///
+    /// > When used on a Link, identifies the MIME media type of the referenced resource.
+    ///
+    /// See [`document::view::fetch::property::media_type()`](../fetch/property/fn.media_type.html).
+    pub fn media_type(&self) -> Result<MediaTypeView<'a>> {
+        fetch::property::media_type(self.object)
+    }
+
+    /// Returns `name`.
+    ///
+    /// See [`document::view::fetch::property::name()`](../fetch/property/fn.name.html).
+    pub fn name(&self) -> Result<NaturalLanguageView<'a>> {
+        fetch::property::name(self.object)
+    }
+
+    /// Returns `preview`.
+    ///
+    /// See [`document::view::fetch::property::preview()`](../fetch/property/fn.preview.html).
+    pub fn preview(&self) -> Result<SingleOrMultiView<ObjectOrLinkView<'a>>> {
+        fetch::property::preview(self.object)
+    }
+
+    /// Returns `rel`.
+    ///
+    /// See [`document::view::fetch::property::rel()`](../fetch/property/fn.rel.html).
+    pub fn rel(&self) -> Result<SingleOrMultiView<&'a str>> {
+        fetch::property::rel(self.object)
+    }
+
+    /// Returns `width`.
+    ///
+    /// See [`document::view::fetch::property::width()`](../fetch/property/fn.width.html).
+    pub fn width(&self) -> Result<u64> {
+        fetch::property::width(self.object)
     }
 }
 

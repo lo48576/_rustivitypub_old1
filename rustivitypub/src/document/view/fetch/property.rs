@@ -5,6 +5,7 @@ use document::consts;
 use document::view::{Result, PropertyError, TryFromJsonValue};
 use document::view::{NaturalLanguageView, IriView, ObjectOrLinkView, SingleOrMultiView};
 use document::view::{DateTimeView, LinkView, MediaTypeView, DurationView, ImageOrLinkView};
+use document::view::LanguageTagView;
 use document::view::fetch::types;
 
 
@@ -146,6 +147,16 @@ pub fn generator(object: &JsonValue) -> Result<SingleOrMultiView<ObjectOrLinkVie
 }
 
 
+/// Returns `height`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-height).
+#[inline]
+pub fn height(object: &JsonValue) -> Result<u64> {
+    types::non_negative_integer(object.get(consts::HEIGHT))
+}
+
+
 /// Returns `href`.
 ///
 /// Returns `href` property (string) if the given JSON value is object (map),
@@ -162,6 +173,16 @@ pub fn href(object: &JsonValue) -> Result<IriView> {
         JsonValue::String(ref s) => Ok(IriView::new(s)),
         _ => Err(PropertyError::TypeMismatch),
     }
+}
+
+
+/// Returns `hreflang`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-hreflang).
+#[inline]
+pub fn hreflang(object: &JsonValue) -> Result<LanguageTagView> {
+    types::language_tag(object.get(consts::HREFLANG))
 }
 
 
@@ -250,6 +271,16 @@ pub fn published(object: &JsonValue) -> Result<DateTimeView> {
 }
 
 
+/// Returns `rel`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-rel).
+#[inline]
+pub fn rel(object: &JsonValue) -> Result<SingleOrMultiView<&str>> {
+    types::single_or_multi_string(object.get(consts::REL))
+}
+
+
 /// Returns `replies`.
 ///
 /// See [\[REC-activitystreams-vocabulary-20170523\] 4.
@@ -319,4 +350,14 @@ pub fn updated(object: &JsonValue) -> Result<DateTimeView> {
 #[inline]
 pub fn url(object: &JsonValue) -> Result<SingleOrMultiView<LinkView>> {
     types::single_or_multi_link(object.get(consts::URL))
+}
+
+
+/// Returns `width`.
+///
+/// See [\[REC-activitystreams-vocabulary-20170523\] 4.
+/// Properties](https://www.w3.org/TR/2017/REC-activitystreams-vocabulary-20170523/#dfn-width).
+#[inline]
+pub fn width(object: &JsonValue) -> Result<u64> {
+    types::non_negative_integer(object.get(consts::WIDTH))
 }
